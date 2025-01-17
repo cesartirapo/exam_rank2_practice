@@ -1,4 +1,4 @@
-
+#include <stdio.h>
 char    *ft_strrev(char *str)
 
 {
@@ -18,4 +18,11 @@ char    *ft_strrev(char *str)
         len--;
     }
     return (str);
+}
+
+int main()
+{
+	char str[] = "abcdefghijklmnop";
+	ft_strrev(str);
+	printf("%s", str);
 }

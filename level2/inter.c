@@ -14,8 +14,7 @@ void    inter(char *s1, char *s2)
             if (s1[i] == s2[j])
             {
                 if (!seen[(unsigned char)s1[i]])//s1[i] se convierte explícitamente a unsigned char para asegurar que el índice del arreglo seen[] sea tratado correctamente como un valor no negativo. Este paso es importante porque s1[i] puede ser un valor negativo si se trata como signed char en algunas plataformas, y queremos asegurarnos de que el índice en seen[] siempre esté dentro del rango 0-255.
-                //si seen[s[1]] es 0, es decir, no se ha visto, entonces !seen convierte 1 y se ejecuta el buble. En realidad es una mierda.
-                //más fácil sería decir if(seen[(unsigned char)s1[i]] == 0)
+                //si seen[s[1]] es 0, es decir, no se ha visto, entonces !seen convierte 1 y se ejecuta el buble. En realidad es una mierda. Más fácil sería decir if(seen[(unsigned char)s1[i]] == 0)
                 {
                     write(1, &s1[i], 1);
                     seen[(unsigned char)s1[i]] = 1;
