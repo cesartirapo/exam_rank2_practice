@@ -25,6 +25,37 @@ char** make_area(char** zone, t_point size)// Esta función se encarga de crear 
 	//Así que en main, area ahora apunta a la misma memoria que new. Es decir, area tiene acceso a las mismas cadenas que se crearon y copiaron en la función make_area.
 }
 
+// Función para agregar una fila
+char** add_row(char** zone, t_point* size)
+{
+    size->y++;  // Aumenta el número de filas
+
+    // Reserva memoria para el nuevo array de punteros (aumentar filas por 1)
+    zone = realloc(zone, size->y * sizeof(char*));
+
+    // Reserva memoria para la nueva fila
+    zone[size->y - 1] = malloc(size->x + 1);
+    
+    // Inicializa la nueva fila (se puede hacer de la forma que necesites, aquí pongo '0')
+    for (int i = 0; i < size->x; ++i)
+        zone[size->y - 1][i] = '0';
+    zone[size->y - 1][size->x] = '\0';  // Termina la nueva fila con el caracter nulo
+
+    return zone;
+}
+
+// Función para agregar una columna
+void add_column(char** zone, t_point size)
+{
+    for (int i = 0; i < size.y; ++i)
+    {
+        // Reasigna espacio para cada fila con una columna adicional
+        zone[i] = realloc(zone[i], size.x + 2);  // Aumenta el tamaño de la fila por 1 (columna adicional)
+        zone[i][size.x] = '0';  // Añadir un valor a la nueva columna (aquí uso '0')
+        zone[i][size.x + 1] = '\0';  // Asegura que la fila sigue terminando en el carácter nulo
+    }
+}
+
 int main(void)
 {
 	t_point size = {8, 5};//t_point size = {8, 5};, se crea una estructura en memoria que contiene los dos datos (8 y 5), almacenados en dos campos consecutivos llamados x e y. Representa un punto en 2D con dos coordenadas (x y y).
@@ -46,6 +77,23 @@ int main(void)
 		printf("%s\n", area[i]);
 	printf("\n");
 
+	// Agregar una fila
+    area = add_row(area, &size);
+
+	printf("Mapa después de agregar una fila:\n");
+    for (int i = 0; i < size.y; ++i)
+        printf("%s\n", area[i]);
+    printf("\n");
+
+    // Agregar una columna
+    add_column(area, size);
+    size.x++;  // Incrementamos el tamaño de las columnas
+
+    printf("Mapa después de agregar una columna:\n");
+    for (int i = 0; i < size.y; ++i)
+        printf("%s\n", area[i]);
+    printf("\n");
+
 	t_point begin = {7, 4};//La línea t_point begin = {7, 4}; crea una variable llamada begin de tipo t_point, que es una estructura, y la inicializa con los valores 7 y 4.
 	//begin indica un lugar específico en el mapa donde realizar una operación, como por ejemplo una inicialización de algún algoritmo (por ejemplo, el algoritmo de "flood fill").
 	flood_fill(area, size, begin);
@@ -53,3 +101,6 @@ int main(void)
 		printf("%s\n", area[i]);
 	return (0);
 }
+/*
+
+*/
