@@ -46,7 +46,7 @@ int main(void)
 		printf("%s\n", area[i]);
 	printf("\n");
 
-	t_point begin = {7, 4};//La línea t_point begin = {7, 4}; crea una variable llamada begin de tipo t_point, que es una estructura, y la inicializa con los valores 7 y 4.
+	t_point begin = {7, 4};//La línea t_point begin = {7, 4}; crea una variable llamada begin de tipo t_point, que es una estructura, y la inicializa con los valores x = 7 e y = 4.
 	//begin indica un lugar específico en el mapa donde realizar una operación, como por ejemplo una inicialización de algún algoritmo (por ejemplo, el algoritmo de "flood fill").
 	flood_fill(area, size, begin);
 	for (int i = 0; i < size.y; ++i)
