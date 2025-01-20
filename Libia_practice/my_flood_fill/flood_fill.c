@@ -52,6 +52,36 @@ int main(void)
     
     for(int i = 0; i < size.y; i++)
         printf("%s\n", area[i]);
+    printf("\n");
+
+    for(int i = 0; i < size.y; i++)
+        printf("%s\n", zone[i]);
 
     return 0;
 }
+
+/*
+en lugar de reservar memoria con malloc creando un arreglo de punteros a arrays de tamaño size.x llamado area, podría haber directamente trabajado con el arreglo de punteros zone?
+ChatGPT said:
+ChatGPT
+Sí, podrías haber trabajado directamente con el arreglo de punteros zone sin necesidad de usar malloc. Si zone ya está definido como un arreglo de punteros a cadenas de longitud size.x, puedes pasarlo directamente a las funciones sin necesidad de reservar memoria adicional.
+You said:
+por que se reserva entonces memoria con malloc? que pasa con la memoria que hemos usado para crear el mapa inicial con char *zone []?
+ChatGPT said:
+ChatGPT
+La razón para usar malloc es que zone es un arreglo de punteros a cadenas de caracteres (es decir, cada fila es una cadena estática). Cuando usas malloc, estás creando un nuevo arreglo dinámico (new) para almacenar el mapa, lo que permite modificarlo sin afectar el original (zone).
+La memoria de zone es estática, lo que significa que no puedes modificar su tamaño o cambiar su contenido dinámicamente sin sobrescribir o corromper la memoria. Al usar malloc para new, creas una copia del mapa que puedes modificar sin afectar la memoria original de zone.
+You said:
+no podría entonces usar zone y cambiar los '1' por 'F'?
+ChatGPT said:
+ChatGPT
+No podrías cambiar los '1' por 'F' directamente en zone porque zone es un arreglo de punteros a cadenas de caracteres constantes (no dinámicas). Las cadenas literales, como las que usas en zone[], están almacenadas en una sección de memoria de solo lectura, lo que significa que no puedes modificar su contenido directamente.
+Usar malloc y crear una copia dinámica con new te da un espacio de memoria donde sí puedes hacer cambios sin restricciones.
+You said:
+es decir, que con malloc puedo modificar el contenido de las cadenas, asi como crear o eliminar nuevas filas o columnas
+ChatGPT said:
+ChatGPT
+Exactamente. Con malloc puedes:
+Modificar el contenido de las cadenas: A diferencia de las cadenas literales (como las de zone[]), las cadenas dinámicas creadas con malloc se almacenan en memoria dinámica, lo que permite que puedas cambiar su contenido (como reemplazar '1' por 'F').
+Crear nuevas filas o columnas: Con malloc, puedes asignar memoria para nuevas filas y columnas según sea necesario, redimensionando dinámicamente el espacio del mapa. Esto no es posible con las cadenas literales estáticas, donde el tamaño y contenido son fijos.
+*/
