@@ -29,4 +29,12 @@ Uso de #ifndef, #define y #endif:
 
 Estas directivas se utilizan para prevenir la inclusión múltiple del archivo de encabezado.
 Si este archivo .h es incluido en varios archivos .c dentro del proyecto, el bloque entre #ifndef y #endif asegura que la estructura solo se defina una vez, evitando conflictos o errores de compilación debido a definiciones duplicadas.
+
+Si no quieres crear un alias, simplemente omites typedef. Quedaría así:
+struct s_point
+{
+    int x;
+    int y;
+};
+En este caso, para declarar una variable usarías struct s_point en lugar de t_point.
 */
